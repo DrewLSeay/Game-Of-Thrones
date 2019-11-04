@@ -1,0 +1,37 @@
+package com.seay.game_of_thrones.inject;
+
+
+import android.content.Context;
+
+import com.seay.game_of_thrones.GameOfThronesApplication;
+import com.seay.game_of_thrones.model.Welcome;
+
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
+
+@Module
+public class ApplicationModule {
+
+    private GameOfThronesApplication application;
+
+    public ApplicationModule(GameOfThronesApplication application){
+        this.application = application;
+    }
+
+    @Provides
+    @Singleton
+    Context provideContext(){
+        return application;
+    }
+
+    @Provides
+    @Singleton
+    Welcome provideWelcome() {return new Welcome();}
+
+
+
+
+
+}

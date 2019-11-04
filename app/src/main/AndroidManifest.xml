@@ -3,6 +3,7 @@
     package="com.seay.game_of_thrones">
 
     <application
+        android:name=".GameOfThronesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

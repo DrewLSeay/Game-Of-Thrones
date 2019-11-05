@@ -4,7 +4,6 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-
 import com.seay.game_of_thrones.model.GoTCharacter;
 import com.seay.game_of_thrones.util.Constants;
 

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Game-Of-Thrones</string>
+
+
+    <!-- Errors -->
+    <string name="no_network_detected">Sorry, you appear to be offline.</string>
+    <string name="timeout">Sorry, the network request timed out. Please try again later.</string>
+
+
+    <string name="base_url">https://mysafeinfo.com/api/</string>
+
 </resources>

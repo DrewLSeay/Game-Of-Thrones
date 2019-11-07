@@ -1,10 +1,10 @@
 package com.seay.game_of_thrones.inject;
 
-
 import android.content.Context;
 
 import com.seay.game_of_thrones.GameOfThronesApplication;
 import com.seay.game_of_thrones.model.Welcome;
+import com.seay.game_of_thrones.network.service.ApiService;
 
 import javax.inject.Singleton;
 
@@ -16,22 +16,25 @@ public class ApplicationModule {
 
     private GameOfThronesApplication application;
 
-    public ApplicationModule(GameOfThronesApplication application){
+    public ApplicationModule(GameOfThronesApplication application) {
         this.application = application;
     }
 
     @Provides
     @Singleton
-    Context provideContext(){
+    Context provideContext() {
         return application;
     }
 
     @Provides
     @Singleton
-    Welcome provideWelcome() {return new Welcome();}
+    Welcome provideWelcome() {
+        return new Welcome();
+    }
 
-
-
-
-
+    @Provides
+    @Singleton
+    ApiService provideApiService(Context context) {
+        return new ApiService(context);
+    }
 }

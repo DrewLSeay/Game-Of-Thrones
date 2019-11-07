@@ -16,7 +16,7 @@ public class Welcome {
         Injector.obtain().inject(this);
     }
 
-    public String getWelcomeString(){
+    public String getWelcomeString() {
         return context.getString(R.string.app_name);
     }
 

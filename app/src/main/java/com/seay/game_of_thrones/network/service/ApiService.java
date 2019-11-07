@@ -32,7 +32,7 @@ public class ApiService {
         return apiServiceInterface.getCharacterData(list, token, table, format);
     }
 
-    public void getGoTCharacters(Callback<List<CharacterDTO>> callback) {
+    public void getGoTCharacters(@NonNull Callback<List<CharacterDTO>> callback) {
         getGoTCharactersCall("custom",
                 "TDEFlq8fr6",
                 "gameofthrones",

@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.seay.game_of_thrones.R;
 import com.seay.game_of_thrones.inject.Injector;
-import com.seay.game_of_thrones.model.GoTCharacter;
+import com.seay.game_of_thrones.model.CharacterDTO;
 import com.seay.game_of_thrones.model.Welcome;
 import com.seay.game_of_thrones.network.service.ApiService;
 
@@ -33,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.helloText)
     TextView welcomeTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -44,21 +46,19 @@ public class MainActivity extends AppCompatActivity {
         welcomeTextView.setText(welcome.getWelcomeString());
 
 
-        apiService.configApiService(this);
-
-        apiService.getGoTCharacters(new Callback<List<GoTCharacter>>() {
+        apiService.getGoTCharacters(new Callback<List<CharacterDTO>>() {
             @Override
-            public void onResponse(Call<List<GoTCharacter>> call, @NonNull Response<List<GoTCharacter>> response) {
-                List<GoTCharacter> characters = response.body();
+            public void onResponse(Call<List<CharacterDTO>> call, @NonNull Response<List<CharacterDTO>> response) {
+                List<CharacterDTO> characters = response.body();
 
-                if(characters != null){
-                    welcomeTextView.setText(characters.get(0).getCharacterInformation());
+                if (characters != null) {
+                    welcomeTextView.setText(characters.get(0).character);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<GoTCharacter>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error :(",Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<CharacterDTO>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error :(", Toast.LENGTH_SHORT).show();
             }
         });
     }

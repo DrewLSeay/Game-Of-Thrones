@@ -4,8 +4,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.seay.game_of_thrones.model.GoTCharacter;
-import com.seay.game_of_thrones.util.Constants;
+import com.seay.game_of_thrones.R;
+import com.seay.game_of_thrones.model.CharacterDTO;
 
 import java.util.List;
 
@@ -24,28 +24,29 @@ public class ApiService {
         configApiService(context);
     }
 
-    private Call<List<GoTCharacter>> getGoTCharactersCall(String list, String token, String table, String format){
+    private Call<List<CharacterDTO>> getGoTCharactersCall(@NonNull String list,
+                                                          @NonNull String token,
+                                                          @NonNull String table,
+                                                          @NonNull String format) {
+
         return apiServiceInterface.getCharacterData(list, token, table, format);
     }
 
-    public void getGoTCharacters(Callback<List<GoTCharacter>> callback){
+    public void getGoTCharacters(Callback<List<CharacterDTO>> callback) {
         getGoTCharactersCall("custom",
                 "TDEFlq8fr6",
                 "gameofthrones",
                 "json")
-                .enqueue( callback);
+                .enqueue(callback);
     }
 
-    public void configApiService(@NonNull Context context){
-
+    private void configApiService(@NonNull Context context) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(context.getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         apiServiceInterface = retrofit.create(ApiServiceInterface.class);
     }
-
 
 
 }

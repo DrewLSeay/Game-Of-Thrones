@@ -17,7 +17,4 @@ public interface AppComponent {
 
     //Models
     void inject(Welcome welcome);
-
-    //Networking
-    void inject(ApiServiceInterface apiServiceInterface);
 }

@@ -53,11 +53,9 @@ public class ApiService {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
         }
 
-
         OkHttpClient.Builder okClientBuilder = new OkHttpClient.Builder()
                 .addInterceptor(new ErrorInterceptor(context))
                 .addInterceptor(loggingInterceptor);
-
 
         okHttpClient = okClientBuilder.build();
         Retrofit retrofit = new Retrofit.Builder()

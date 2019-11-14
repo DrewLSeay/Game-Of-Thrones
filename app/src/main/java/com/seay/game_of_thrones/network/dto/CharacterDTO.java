@@ -1,4 +1,4 @@
-package com.seay.game_of_thrones.model;
+package com.seay.game_of_thrones.network.dto;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -24,5 +24,4 @@ public class CharacterDTO {
 
     @SerializedName("credit")
     public String credit;
-
 }

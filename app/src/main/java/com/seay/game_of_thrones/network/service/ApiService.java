@@ -6,15 +6,17 @@ import androidx.annotation.NonNull;
 
 import com.seay.game_of_thrones.BuildConfig;
 import com.seay.game_of_thrones.R;
-import com.seay.game_of_thrones.model.CharacterDTO;
+import com.seay.game_of_thrones.network.dto.CharacterDTO;
 import com.seay.game_of_thrones.network.interceptor.ErrorInterceptor;
 
+import java.io.IOException;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -27,20 +29,20 @@ public class ApiService {
         configApiService(context);
     }
 
-    private Call<List<CharacterDTO>> getGoTCharactersCall(@NonNull String list,
-                                                          @NonNull String token,
-                                                          @NonNull String table,
-                                                          @NonNull String format) {
+    private Call<List<CharacterDTO>> getGoTCharactersCall() {
 
-        return apiServiceInterface.getCharacterData(list, token, table, format);
+        return apiServiceInterface.getCharacterData("custom",
+                "TDEFlq8fr6",
+                "gameofthrones",
+                "json");
     }
 
     public void getGoTCharacters(@NonNull Callback<List<CharacterDTO>> callback) {
-        getGoTCharactersCall("custom",
-                "TDEFlq8fr6",
-                "gameofthrones",
-                "json")
-                .enqueue(callback);
+        getGoTCharactersCall().enqueue(callback);
+    }
+
+    public Response<List<CharacterDTO>> getGoTCharactersSynchronously() throws IOException {
+        return getGoTCharactersCall().execute();
     }
 
 
@@ -65,6 +67,4 @@ public class ApiService {
                 .build();
         apiServiceInterface = retrofit.create(ApiServiceInterface.class);
     }
-
-
 }

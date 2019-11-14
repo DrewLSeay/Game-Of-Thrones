@@ -19,6 +19,4 @@ public class Welcome {
     public String getWelcomeString() {
         return context.getString(R.string.app_name);
     }
-
-
 }

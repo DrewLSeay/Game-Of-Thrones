@@ -1,7 +1,7 @@
 package com.seay.game_of_thrones.network.service;
 
 
-import com.seay.game_of_thrones.model.CharacterDTO;
+import com.seay.game_of_thrones.network.dto.CharacterDTO;
 
 import java.util.List;
 
@@ -22,7 +22,6 @@ public interface ApiServiceInterface {
     String TABLE = "table";
     String FORMAT = "format";
     //end region
-
 
     @GET(ENDPOINT_CHARACTER_LIST)
     Call<List<CharacterDTO>> getCharacterData(

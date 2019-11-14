@@ -29,5 +29,4 @@ public class NetworkException extends IOException {
                 + "errorMessage= '" + errorMessage + '\''
                 + "' httpErrorCode = " + httpErrorCode + '}';
     }
-
 }

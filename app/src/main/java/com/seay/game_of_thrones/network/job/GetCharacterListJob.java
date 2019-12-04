@@ -20,16 +20,13 @@ import javax.inject.Inject;
 import retrofit2.Response;
 import timber.log.Timber;
 
-public class GetCharacterListJob extends Job {
+public class GetCharacterListJob extends BaseJob {
 
     @Inject
     transient ApiService apiService;
 
     @Inject
     transient MainDAO mainDAO;
-
-    //todo: Define priority in BaseJob
-    public static final int PRIORITY = 1;
 
     public GetCharacterListJob() {
         super(new Params(PRIORITY).requireNetwork());
@@ -55,11 +52,11 @@ public class GetCharacterListJob extends Job {
             characterList.add(characterInformation);
         }
         mainDAO.save(characterList);
-    }// end onRun()
+    }
 
     @Override
     protected RetryConstraint shouldReRunOnThrowable(Throwable throwable, int runCount, int maxRunCount) {
-        return RetryConstraint.createExponentialBackoff(runCount, 1000);
+        return RetryConstraint.createExponentialBackoff(runCount, INITIAL_BACKOFF);
     }
 
     @Override

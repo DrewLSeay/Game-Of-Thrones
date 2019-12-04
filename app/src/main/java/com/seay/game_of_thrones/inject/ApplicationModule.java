@@ -7,6 +7,7 @@ import com.birbit.android.jobqueue.config.Configuration;
 import com.seay.game_of_thrones.GameOfThronesApplication;
 import com.seay.game_of_thrones.database.MainDAO;
 import com.seay.game_of_thrones.model.Welcome;
+import com.seay.game_of_thrones.network.job.BaseJob;
 import com.seay.game_of_thrones.network.job.GetCharacterListJob;
 import com.seay.game_of_thrones.network.service.ApiService;
 import com.seay.game_of_thrones.repository.CharacterRepository;
@@ -68,7 +69,7 @@ public class ApplicationModule {
                 .loadFactor(loadFactor)
                 .minConsumerCount(minCount)
                 .injector(job -> {
-                    if (job instanceof GetCharacterListJob) {
+                    if (job instanceof BaseJob) {
                         ((GetCharacterListJob) job).inject(Injector.obtain());
                     }
                 })

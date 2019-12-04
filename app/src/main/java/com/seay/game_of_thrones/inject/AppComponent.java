@@ -27,5 +27,5 @@ public interface AppComponent {
     void inject(GetCharacterListJob job);
 
     //Repositories
-    void inject(CharacterRepository characterRepository);
+    void inject(CharacterRepository repository);
 }

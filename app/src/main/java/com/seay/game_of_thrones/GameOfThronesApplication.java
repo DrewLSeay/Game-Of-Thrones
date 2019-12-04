@@ -2,6 +2,7 @@ package com.seay.game_of_thrones;
 
 import android.app.Application;
 
+import com.seay.game_of_thrones.database.MainDAO;
 import com.seay.game_of_thrones.inject.Injector;
 
 import timber.log.Timber;
@@ -12,9 +13,15 @@ public class GameOfThronesApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        setUpRealm();
+
         setUpDagger();
 
         setUpLogging();
+    }
+
+    private void setUpRealm() {
+        MainDAO.init(this);
     }
 
     private void setUpDagger() {
@@ -28,5 +35,4 @@ public class GameOfThronesApplication extends Application {
             //todo: reporting release tree
         }
     }
-
 }

@@ -1,29 +1,30 @@
 package com.seay.game_of_thrones.activity;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.seay.game_of_thrones.R;
+import com.seay.game_of_thrones.androidViewModel.CharacterAndroidViewModel;
+import com.seay.game_of_thrones.database.realmObjects.CharacterInformation;
 import com.seay.game_of_thrones.inject.Injector;
-import com.seay.game_of_thrones.model.CharacterDTO;
 import com.seay.game_of_thrones.model.Welcome;
 import com.seay.game_of_thrones.network.service.ApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private CharacterAndroidViewModel characterAndroidViewModel;
 
     @Inject
     Welcome welcome;
@@ -43,24 +44,21 @@ public class MainActivity extends AppCompatActivity {
 
         Injector.obtain().inject(this);
 
+        characterAndroidViewModel = ViewModelProviders.of(this).get(CharacterAndroidViewModel.class);
+
+        characterAndroidViewModel.getCharactersInformation().observe(this, MainActivity.this::setResults);
+
         welcomeTextView.setText(welcome.getWelcomeString());
+    }
 
+    private void setResults(@Nullable List<CharacterInformation> results) {
+        if (results == null) {
+            results = new ArrayList<>();
+        }
 
-        apiService.getGoTCharacters(new Callback<List<CharacterDTO>>() {
-            @Override
-            public void onResponse(Call<List<CharacterDTO>> call, @NonNull Response<List<CharacterDTO>> response) {
-                List<CharacterDTO> characters = response.body();
-
-                if (characters != null) {
-                    welcomeTextView.setText(characters.get(0).character);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<CharacterDTO>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error :(", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (!results.isEmpty()) {
+            welcomeTextView.setText(results.get(0).getDescription());
+        }
     }
 }
 

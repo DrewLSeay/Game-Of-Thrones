@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.seay.game_of_thrones.R;
@@ -35,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.helloText)
     TextView welcomeTextView;
 
+    @BindView(R.id.button)
+    Button button;
+
+    @BindView(R.id.networkCallTextView)
+    TextView networkCallTextView;
+
+    @BindView(R.id.networkCallButton)
+    Button networkCallButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
         characterAndroidViewModel = ViewModelProviders.of(this).get(CharacterAndroidViewModel.class);
 
-        characterAndroidViewModel.getCharactersInformation().observe(this, MainActivity.this::setResults);
-
         welcomeTextView.setText(welcome.getWelcomeString());
+
+        networkCallButton.setOnClickListener(v -> characterAndroidViewModel.getCharactersInformation().observe(this, MainActivity.this::setResults));
+        button.setOnClickListener(v -> welcomeTextView.setText(getString(R.string.base_url)));
     }
 
     private void setResults(@Nullable List<CharacterInformation> results) {
@@ -56,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
             results = new ArrayList<>();
         }
 
-        if (!results.isEmpty()) {
-            welcomeTextView.setText(results.get(0).getDescription());
+        if (!results.isEmpty() && results.get(1) != null) {
+            networkCallTextView.setText(results.get(1).getCharacter());
         }
     }
 }

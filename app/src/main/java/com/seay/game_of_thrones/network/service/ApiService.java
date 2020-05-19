@@ -12,6 +12,7 @@ import com.seay.game_of_thrones.network.interceptor.ErrorInterceptor;
 import java.io.IOException;
 import java.util.List;
 
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;

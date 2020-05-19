@@ -4,24 +4,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class CharacterDTO {
 
-    @SerializedName("id")
+    @SerializedName("ID")
     public int id;
 
-    @SerializedName("character")
+    @SerializedName("Character")
     public String character;
 
-    @SerializedName("actor")
+    @SerializedName("Actor")
     public String actor;
 
-    @SerializedName("description")
+    @SerializedName("Description")
     public String description;
 
-    @SerializedName("image")
+    @SerializedName("Image")
     public String image;
 
-    @SerializedName("caption")
+    @SerializedName("Caption")
     public String caption;
 
-    @SerializedName("credit")
+    @SerializedName("Credit")
     public String credit;
 }
